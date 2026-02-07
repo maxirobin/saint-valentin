@@ -27,23 +27,15 @@ function App() {
   };
 
   const sendToApi = async () => {
-    try {
-      const res = await fetch("https://ton-api.com/valentine", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(answers),
-      });
+    const message = `
+Réponse pour la Saint-Valentin :
+- Activité : ${answers.activity}
+- Date : ${answers.date}
+`.trim();
 
-      if (!res.ok) throw new Error("Erreur API");
-
-      alert("💖 Réponse envoyée !");
-    } catch (error) {
-      console.error(error);
-      alert("😢 Une erreur est survenue");
-    }
-    window.location.replace("http://instagram.com/m/mxrb81");
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/33695321191?text=${encodedMessage}`;
+    window.location.replace(whatsappLink);
   };
 
   return (
